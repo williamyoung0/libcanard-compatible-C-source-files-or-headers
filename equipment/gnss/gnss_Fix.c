@@ -75,7 +75,8 @@ uint32_t uavcan_equipment_gnss_Fix_encode_internal(uavcan_equipment_gnss_Fix* so
     // Static array (ned_velocity)
     for (c = 0; c < 3; c++)
     {
-        canardEncodeScalar(msg_buf, offset, 16, (void*)(source->ned_velocity + c)); // 32767
+        tmp_float = canardConvertNativeFloatToFloat16(source->ned_velocity[c]);
+        canardEncodeScalar(msg_buf, offset, 16, (void*)&tmp_float); // 32767
         offset += 16;
     }
 
