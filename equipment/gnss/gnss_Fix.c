@@ -108,10 +108,11 @@ uint32_t uavcan_equipment_gnss_Fix_encode_internal(uavcan_equipment_gnss_Fix* so
     // - Add array items
     for (c = 0; c < source->position_covariance.len; c++)
     {
+        tmp_float = canardConvertNativeFloatToFloat16(source->position_covariance.data[c]);
         canardEncodeScalar(msg_buf,
                            offset,
                            16,
-                           (void*)(source->position_covariance.data + c));// 32767
+                           (void*)&tmp_float);// 32767
         offset += 16;
     }
 
@@ -126,10 +127,11 @@ uint32_t uavcan_equipment_gnss_Fix_encode_internal(uavcan_equipment_gnss_Fix* so
     // - Add array items
     for (c = 0; c < source->velocity_covariance.len; c++)
     {
+        tmp_float = canardConvertNativeFloatToFloat16(source->velocity_covariance.data[c]);
         canardEncodeScalar(msg_buf,
                            offset,
                            16,
-                           (void*)(source->velocity_covariance.data + c));// 32767
+                           (void*)&tmp_float);// 32767
         offset += 16;
     }
 
